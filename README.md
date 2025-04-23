@@ -1,8 +1,60 @@
-# RAG API
+# Production RAG Platform
 
-A production-grade Retrieval-Augmented Generation (RAG) API built with FastAPI, featuring hybrid vector + keyword search, multi-format document processing, and Redis-backed conversation memory.
+<p align="center">
+  <strong>Production-grade Retrieval-Augmented Generation API with hybrid search, multi-format ingestion, pgvector, Redis memory, Qwen LLMs, and FastAPI.</strong>
+</p>
 
-## Features
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/Python-3.11%2B-3776AB" alt="Python"></a>
+  <a href="#"><img src="https://img.shields.io/badge/FastAPI-API-009688" alt="FastAPI"></a>
+  <a href="#"><img src="https://img.shields.io/badge/PostgreSQL-16-4169E1" alt="PostgreSQL"></a>
+  <a href="#"><img src="https://img.shields.io/badge/pgvector-Vector Search-336791" alt="pgvector"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Redis-Memory-DC382D" alt="Redis"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Qwen-LLM-615CED" alt="Qwen"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Docker-Infrastructure-2496ED" alt="Docker"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Talha-Techie">GitHub Profile</a> ·
+  <a href="#quick-start">Quick Start</a> ·
+  <a href="#architecture">Architecture</a> ·
+  <a href="#security">Security</a>
+</p>
+
+---
+
+## Overview
+
+**Production RAG Platform** is a retrieval-augmented generation backend built around FastAPI, PostgreSQL + pgvector, local sentence-transformer embeddings, Redis-backed conversation memory, and an OpenAI-compatible Qwen endpoint.
+
+It supports multi-format document ingestion, semantic vector search, PostgreSQL full-text keyword search, hybrid retrieval, repository/document management, bulk uploads, conversation-aware answer generation, API-key authentication, and a Streamlit interface.
+
+### Business / Engineering Value
+
+- Hybrid vector + PostgreSQL keyword retrieval.
+- Local `BAAI/bge-large-en-v1.5` embeddings with 1024 dimensions.
+- PDF, TXT, MD, DOCX, and HTML document processing.
+- Redis-backed conversation memory with a 7-day TTL.
+- Qwen models through an OpenAI-compatible DashScope API.
+- Repository/document CRUD and bulk ingestion endpoints.
+- X-API-Key authentication and Swagger integration.
+
+## Technology Stack
+
+| Layer | Technology |
+|---|---|
+| Backend | FastAPI |
+| Database | PostgreSQL 16 |
+| Vector search | pgvector |
+| Embeddings | BAAI/bge-large-en-v1.5 |
+| Memory | Redis 7 |
+| LLM | Qwen via DashScope |
+| Frontend | Streamlit |
+| Infrastructure | Docker Compose |
+
+---
+
+## Key Features
 
 - **Document Processing**: Upload and process PDF, TXT, MD, DOCX, and HTML files
 - **Vector Search**: Semantic similarity search using pgvector and local sentence-transformers embeddings (BAAI/bge-large-en-v1.5, 1024-dim)
@@ -311,3 +363,65 @@ docker compose up -d
 
 **App won't start — validation error**
 - `OPENAI_API_KEY` and `SERPAPI_API_KEY` have no defaults and must be present in `source/.env`
+
+---
+
+## Security
+
+For production use, treat uploaded documents, prompts, model outputs, credentials, user data, and tool/API responses as potentially sensitive.
+
+Recommended controls include:
+
+- Keep secrets in environment variables or a dedicated secret manager.
+- Never commit `.env` files, API keys, database passwords, or tokens.
+- Validate and constrain all external inputs before processing.
+- Apply authentication and authorization to production endpoints where appropriate.
+- Use least-privilege access for databases, tools, cloud resources, and service accounts.
+- Enforce HTTPS/TLS at the deployment boundary.
+- Add request limits, timeouts, structured logging, and dependency scanning.
+- Review model/tool outputs before allowing irreversible actions.
+
+> Security, compliance, SSO, RBAC, or enterprise governance capabilities should only be advertised when they are implemented and verified in the deployed environment.
+
+## Production Considerations
+
+Before operating this project in a production environment, consider adding or validating:
+
+- Centralized logs and metrics
+- Health and readiness checks
+- Request tracing and correlation IDs
+- Rate limiting and abuse controls
+- Persistent state and backup strategy
+- CI/CD quality gates
+- Dependency and container vulnerability scanning
+- Model/LLM latency, reliability, and cost monitoring where applicable
+- Horizontal scaling and externalized state where required
+
+## Contributing
+
+Contributions are welcome.
+
+```bash
+git checkout -b feature/your-feature
+git add .
+git commit -m "feat: describe your change"
+git push origin feature/your-feature
+```
+
+When opening a pull request, include the motivation, implementation summary, testing performed, and any API or architecture implications.
+
+## Maintainer
+
+Maintained by **Talha-Techie**.
+
+- GitHub: [github.com/Talha-Techie](https://github.com/Talha-Techie)
+
+## License
+
+Refer to the repository's `LICENSE` file or the license section above for the applicable terms.
+
+---
+
+<p align="center">
+  <strong>Designed as a clean, modular, production-oriented AI/ML engineering project.</strong>
+</p>
